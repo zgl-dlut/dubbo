@@ -1,0 +1,13 @@
+dubbo:
+  application:
+    name: zgl-consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.zgl.dubbo.provider.service
+  protocol:
+      name: dubbo
+      port: 20880
+      host: 10.4.4.184
+server:
+  port: 18081
