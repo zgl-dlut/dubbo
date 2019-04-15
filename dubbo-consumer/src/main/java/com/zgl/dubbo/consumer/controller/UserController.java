@@ -1,12 +1,10 @@
 package com.zgl.dubbo.consumer.controller;
 
-import com.zgl.dubbo.api.domain.User;
-import com.zgl.dubbo.consumer.service.DubboUserService;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.zgl.dubbo.api.service.UserInterface;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @author zgl
@@ -16,16 +14,16 @@ import javax.annotation.Resource;
 @RequestMapping("/dubbo")
 public class UserController {
 
-	@Resource
-	private DubboUserService dubboUserService;
+	@Reference(version = "8.8.8")
+	private UserInterface userInterface;
 
 	@GetMapping("/getUser")
-	public User getUser(String name){
-		return dubboUserService.getUser(name);
+	public String getUser(String name) {
+		return userInterface.getUser(name);
 	}
 
 	@GetMapping("/hello")
-	public String hello(){
+	public String hello() {
 		return "hello dubbo!";
 	}
 }
